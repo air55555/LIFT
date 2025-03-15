@@ -25,139 +25,141 @@ Original file is located at
 # !pip install plyfile
 # !pip install matplotlib
 # !pip install open3d
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from mpl_toolkits.mplot3d import Axes3D
-# def load_point_cloud(file_path):
-#   with open(file_path, 'r') as file:
-#     lines = file.readlines()
-#   points = []
-#   for line in lines[1:]:  # Skip the header line
-#     if line.strip():
-#       x, y, z = map(float, line.split(','))
-#       points.append([x, y, z])
-# 
-#   return np.array(points)
+#ply_file=r'C:\Users\1\PycharmProjects\LIFT\Corner_400mesh222.ply'
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+def load_point_cloud(file_path):
+  with open(file_path, 'r') as file:
+    lines = file.readlines()
+  points = []
+  for line in lines[1:]:  # Skip the header line
+    if line.strip():
+      x, y, z = map(float, line.split(','))
+      points.append([x, y, z])
+
+  return np.array(points)
 
 # Commented out IPython magic to ensure Python compatibility.
 # # @title
 # %%capture
-#         #no output
-# import numpy as np
-# import matplotlib.pyplot as plt
-# from mpl_toolkits.mplot3d import Axes3D
-# 
-# def display_point_cloud(points):
-#     fig = plt.figure()
-#     ax = fig.add_subplot(111, projection='3d')
-#     scatter = ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=points[:, 2], cmap='viridis', marker='.')
-# 
-#     ax.set_xlabel('X')
-#     ax.set_ylabel('Y')
-#     ax.set_zlabel('Z')
-# 
-#     plt.show()
-# 
-# # Example usagepinetre
-# point_cloud = load_point_cloud(f'{directory_path}Corner_small_cut.txt')
-# display_point_cloud(point_cloud)
+        #no output
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
-# Commented out IPython magic to ensure Python compatibility.
-# # @title
+def display_point_cloud(points):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    scatter = ax.scatter(points[:, 0], points[:, 1], points[:, 2], c=points[:, 2], cmap='viridis', marker='.')
+
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+
+    plt.show()
+
+# Example usagepinetre
+#point_cloud = load_point_cloud(f'{directory_path}Corner_small_cut.txt')
+#display_point_cloud(point_cloud)
+
+#Commented out IPython magic to ensure Python compatibility.
+# @title
 # %%capture
-#         #no output
-# import os
-# import numpy as np
-# #import open3d as o3d
-# from plyfile import PlyData, PlyElement
-# import plotly.graph_objects as go
-# 
-# #def read_ply(file_path):
-#  #   plydata = PlyData.read(file_path)
-#   #  vertices = np.vstack([plydata['vertex']['x'], plydata['vertex']['y'], plydata['vertex']['z']]).T
-#    # faces = np.vstack(plydata['face']['vertex_indices'])
-#     #return vertices, faces
-# def compute_mesh_statistics(vertices, faces):
-#     num_vertices = vertices.shape[0]
-#     num_faces = faces.shape[0]
-# 
-#     # Compute bounding box
-#     min_bounds = vertices.min(axis=0)
-#     max_bounds = vertices.max(axis=0)
-#     bounding_box = np.vstack([min_bounds, max_bounds])
-# 
-#     # Compute centroid
-#     centroid = vertices.mean(axis=0)
-# 
-#     # Compute surface area (assuming triangular faces)
-#     def compute_face_area(face):
-#       vertices_face = vertices[face]
-#       a = np.linalg.norm(vertices_face[0] - vertices_face[1])
-#       b = np.linalg.norm(vertices_face[1] - vertices_face[2])
-#       c = np.linalg.norm(vertices_face[2] - vertices_face[0])
-#       s = (a + b + c) / 2
-#       return np.sqrt(s * (s - a) * (s - b) * (s - c))
-# 
-#     surface_area = np.sum([compute_face_area(face) for face in faces])
-# 
-#     return {
-#         "num_vertices": num_vertices,
-#         "num_faces": num_faces,
-#         "bounding_box": bounding_box,
-#         "centroid": centroid,
-#         "surface_area": surface_area
-#     }
-# 
-# def display_mesh_statistics(file_path):
-#     vertices, faces = read_ply(file_path)
-#     stats = compute_mesh_statistics(vertices, faces)
-# 
-#     print(f"Statistics for {file_path}:")
-#     print(f"Number of vertices: {stats['num_vertices']}")
-#     print(f"Number of faces: {stats['num_faces']}")
-#     print(f"Bounding box: \n{stats['bounding_box']}")
-#     print(f"Centroid: {stats['centroid']}")
-#     print(f"Surface area: {stats['surface_area']:.2f}")
-# 
-# def read_ply(file_path):
-#     plydata = PlyData.read(file_path)
-#     vertices = np.vstack([plydata['vertex']['x'], plydata['vertex']['y'], plydata['vertex']['z']]).T
-#     faces = np.vstack(plydata['face']['vertex_indices'])
-#     return vertices, faces
-# 
-# 
-# 
-# 
-# 
-# 
-# def print_all_ply_files(directory_path):
-#     ply_files = [f for f in os.listdir(directory_path) if f.endswith('.ply')]
-#     ply_files = sorted(ply_files)
-#     for i, file_name in enumerate(ply_files):
-#       file_path = os.path.join(directory_path, file_name)
-#       print(file_name)
-#       display_mesh_statistics(file_path)
-# 
+        #no output
+import os
+import numpy as np
+#import open3d as o3d
+from plyfile import PlyData, PlyElement
+import plotly.graph_objects as go
+
+#def read_ply(file_path):
+ #   plydata = PlyData.read(file_path)
+  #  vertices = np.vstack([plydata['vertex']['x'], plydata['vertex']['y'], plydata['vertex']['z']]).T
+   # faces = np.vstack(plydata['face']['vertex_indices'])
+    #return vertices, faces
+def compute_mesh_statistics(vertices, faces):
+    num_vertices = vertices.shape[0]
+    num_faces = faces.shape[0]
+
+    # Compute bounding box
+    min_bounds = vertices.min(axis=0)
+    max_bounds = vertices.max(axis=0)
+    bounding_box = np.vstack([min_bounds, max_bounds])
+
+    # Compute centroid
+    centroid = vertices.mean(axis=0)
+
+    # Compute surface area (assuming triangular faces)
+    def compute_face_area(face):
+      vertices_face = vertices[face]
+      a = np.linalg.norm(vertices_face[0] - vertices_face[1])
+      b = np.linalg.norm(vertices_face[1] - vertices_face[2])
+      c = np.linalg.norm(vertices_face[2] - vertices_face[0])
+      s = (a + b + c) / 2
+      return np.sqrt(s * (s - a) * (s - b) * (s - c))
+
+    surface_area = np.sum([compute_face_area(face) for face in faces])
+
+    return {
+        "num_vertices": num_vertices,
+        "num_faces": num_faces,
+        "bounding_box": bounding_box,
+        "centroid": centroid,
+        "surface_area": surface_area
+    }
+
+def display_mesh_statistics(file_path):
+    vertices, faces = read_ply(file_path)
+    stats = compute_mesh_statistics(vertices, faces)
+
+    print(f"Statistics for {file_path}:")
+    print(f"Number of vertices: {stats['num_vertices']}")
+    print(f"Number of faces: {stats['num_faces']}")
+    print(f"Bounding box: \n{stats['bounding_box']}")
+    print(f"Centroid: {stats['centroid']}")
+    print(f"Surface area: {stats['surface_area']:.2f}")
+
+def read_ply(file_path):
+    plydata = PlyData.read(file_path)
+    vertices = np.vstack([plydata['vertex']['x'], plydata['vertex']['y'], plydata['vertex']['z']]).T
+    faces = np.vstack(plydata['face']['vertex_indices'])
+    return vertices, faces
+
+
+
+
+
+
+def print_all_ply_files(directory_path):
+    ply_files = [f for f in os.listdir(directory_path) if f.endswith('.ply')]
+    ply_files = sorted(ply_files)
+    for i, file_name in enumerate(ply_files):
+      file_path = os.path.join(directory_path, file_name)
+      print(file_name)
+      display_mesh_statistics(file_path)
+
+# works nice 15 mar 2025
 # def visualize_with_plotly(file_path):
 #   vertices, faces = read_ply(file_path)
-# 
+#
 #   # Create a mesh3d plot with distinct colors for each triangle
 #   x, y, z = vertices[:, 0], vertices[:, 1], vertices[:, 2]
 #   i, j, k = faces[:, 0], faces[:, 1], faces[:, 2]
-# 
+#
 #   # Generate a unique intensity for each face
 #   intensities = np.arange(faces.shape[0])
-# 
+#
 #   mesh = go.Mesh3d(
 #       x=x, y=y, z=z,
 #       i=i, j=j, k=k,
-#       intensity=1,#intensities,
+#       intensity=intensities,
 #       colorscale='Viridis',  # Use a colorscale to differentiate faces
 #       intensitymode='cell',
 #       flatshading=True,
 #       showscale=False
 #   )
-# 
+#
 #   # Create line traces for the edges
 #   lines = []
 #   for face in faces:
@@ -166,7 +168,7 @@ Original file is located at
 #       #SHOW LINES
 #       #lines.append(go.Scatter3d(x=[x[start], x[end]],y=[y[start], y[end]],
 #       #z=[z[start], z[end]], mode='lines',line=dict(color='black', width=2)))
-# 
+#
 #   layout = go.Layout(
 #       title=f"Visualizing {file_path} with Plotly",
 #       scene=dict(
@@ -176,318 +178,355 @@ Original file is located at
 #           aspectmode='data'
 #       )
 #   )
-# 
+#
 #   fig = go.Figure(data=[mesh] + lines, layout=layout)
+#   #fig.write_html(r'C:\Users\1\PycharmProjects\LIFT/test_data_plot.html')
+#
 #   fig.show()
-# 
-# def visualize_all_ply_files(directory_path,start_index,num_files):
-#   ply_files = [f for f in os.listdir(directory_path) if f.endswith('.ply')]
-#   ply_files = sorted(ply_files)  # Sort files for consistent ordering
-#   for i, file_name in enumerate(ply_files[start_index:start_index+num_files]):
-#     if file_name.endswith('.ply'):
-#       file_path = os.path.join(directory_path, file_name)
-#       print(f"Visualizing {file_name}...")
-# 
-#       display_mesh_statistics(file_path)
-#       #visualize_with_pyvista(file_path)
-#       visualize_with_plotly(file_path)
-#       #visualize_with_open3d(file_path)
-# 
-# print_all_ply_files(directory_path)
 
-# @title
-visualize_all_ply_files(directory_path,1,1)
-from google.colab import runtime
+def visualize_with_plotly(file_path):
+    vertices, faces = read_ply(file_path)
+
+    # Extract coordinates
+    x, y, z = vertices[:, 0], vertices[:, 1], vertices[:, 2]
+
+    # Create line traces for the edges
+    lines = []
+    for face in faces:
+        for idx in range(3):
+            start, end = face[idx], face[(idx + 1) % 3]
+            lines.append(go.Scatter3d(
+                x=[x[start], x[end]],
+                y=[y[start], y[end]],
+                z=[z[start], z[end]],
+                mode='lines',
+                line=dict(color='black', width=2)
+            ))
+
+    layout = go.Layout(
+        title=f"Visualizing {file_path} with Plotly",
+        scene=dict(
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, showbackground=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, showbackground=False),
+            zaxis=dict(showgrid=False, zeroline=False, showticklabels=False, showbackground=False),
+            bgcolor='white'  # Set background color to white
+        ),
+        showlegend=False,
+        paper_bgcolor='white'  # Set the plot background color to white
+    )
+
+    fig = go.Figure(data=lines, layout=layout)
+    fig.show()
+
+def visualize_all_ply_files(directory_path,start_index,num_files):
+  ply_files = [f for f in os.listdir(directory_path) if f.endswith('.ply')]
+  ply_files = sorted(ply_files)  # Sort files for consistent ordering
+  for i, file_name in enumerate(ply_files[start_index:start_index+num_files]):
+    if file_name.endswith('.ply'):
+      file_path = os.path.join(directory_path, file_name)
+      print(f"Visualizing {file_name}...")
+
+      display_mesh_statistics(file_path)
+      #visualize_with_pyvista(file_path)
+      visualize_with_plotly(file_path)
+      #visualize_with_open3d(file_path)
+
+
+
+directory_path=r'C:\Users\1\PycharmProjects\LIFT'
+print_all_ply_files(directory_path)
+visualize_all_ply_files(directory_path,0,1)
+#from google.colab import runtime
 ##STOP
 #runtime.unassign()
 
 # @title
 # Read the entire file into a DataFrame
-import plotly.express as px
-file_path = f'{directory_path}Corner_small_cut.txt'#lidar.csv'#crystal_4000.xyz' sep='\s+,'
-
-data = pd.read_csv(file_path, header=None, names=['x', 'y', 'z'])
-
-# Create a 3D scatter plot using Plotly
-fig = px.scatter_3d(data, x='x', y='y', z='z',title='3D Point Cloud Visualization')
-
-# Update layout for better visualization
-fig.update_layout(scene=dict(xaxis_title='X', yaxis_title='Y', zaxis_title='Z'))
-fig.update_traces(marker=dict(size=1))
-# Show the plot
-fig.show()
-
-"""----- processing files"""
-
-# @title
-111
-import numpy as np
-import pandas as pd
-import plotly.graph_objs as go
-from scipy.spatial import Delaunay
-from sklearn.preprocessing import MinMaxScaler
-from plyfile import PlyData, PlyElement
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-
-
-
-# Load the LiDAR point cloud data
-# Replace 'your_file.csv' with the path to{{ your point cloud data file
-file_path = f'{directory_path}Corner_small_cut.txt'#lidar.csv'#crystal_4000.xyz' sep='\s+,'
-point_cloud_df = pd.read_csv(file_path,  header=None, engine='python', skiprows=5)
-print(point_cloud_df.head)
-# Extract the point cloud data as a numpy array
-points = point_cloud_df.values
-
-# @title
-# Create a new figure for the 3D plot
-fig = plt.figure(figsize=(10, 8))
-ax = fig.add_subplot(111, projection='3d')
-
-# Plot the point cloud
-ax.scatter(points[:, 0], points[:, 1], points[:, 2], c='b', marker='o')
-
-# Set labels
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-ax.set_title('3D Point Cloud')
-
-# Display the plot
-plt.show()
-
-# @title
-!pip install trimesh
-from scipy.spatial import Delaunay, ConvexHull
-from skimage.measure import marching_cubes
-import trimesh
-
-# Method 1: Delaunay Triangulation
-delaunay = Delaunay(points)
-delaunay_mesh = trimesh.Trimesh(vertices=points, faces=delaunay.convex_hull)
-
-# Method 2: Convex Hull
-hull = ConvexHull(points)
-hull_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 3: Alpha Shapes (Custom implementation)
-# For simplicity, we'll use a fixed alpha value
-alpha = 0.1
-alpha_shape_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)  # Simplified
-
-# Method 4: Ball Pivoting (Custom implementation)
-# Simplified version using convex hull as a placeholder
-ball_pivoting_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 5: Poisson Surface Reconstruction (Custom implementation)
-# Simplified version using convex hull as a placeholder
-poisson_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 6: Marching Cubes
-# Correct the normalization and scaling of points for the volume grid
-volume_shape = (50, 50, 50)
-volume = np.zeros(volume_shape)
-
-# Normalize points to fit within the volume grid
-min_coords = points.min(axis=0)
-max_coords = points.max(axis=0)
-normalized_points = (points - min_coords) / (max_coords - min_coords) * (np.array(volume_shape) - 1)
-normalized_points = np.round(normalized_points).astype(int)
-
-# Ensure points are within the bounds of the volume grid
-valid_indices = np.all((normalized_points >= 0) & (normalized_points < np.array(volume_shape)), axis=1)
-normalized_points = normalized_points[valid_indices]
-
-# Set the volume grid
-volume[normalized_points[:, 0], normalized_points[:, 1], normalized_points[:, 2]] = 1
-
-# Use marching cubes to extract isosurface
-verts, faces, _, _ = marching_cubes(volume, level=0.5)
-marching_cubes_mesh = trimesh.Trimesh(vertices=verts, faces=faces)
-
-# Method 7: Greedy Projection Triangulation (Custom implementation)
-# Simplified version using convex hull as a placeholder
-greedy_projection_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 8: Power Crust (Custom implementation)
-# Simplified version using convex hull as a placeholder
-power_crust_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 9: Cocone Algorithm (Custom implementation)
-# Simplified version using convex hull as a placeholder
-cocone_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Method 10: Scale-Dependent Surface Reconstruction (Custom implementation)
-# Simplified version using convex hull as a placeholder
-scale_dependent_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
-
-# Save the meshes as PLY files
-meshes = {
-    "delaunay_mesh": delaunay_mesh,
-    "hull_mesh": hull_mesh,
-    "alpha_shape_mesh": alpha_shape_mesh,
-    "ball_pivoting_mesh": ball_pivoting_mesh,
-    "poisson_mesh": poisson_mesh,
-    #!!!!!
-    "marching_cubes_mesh": poisson_mesh,#!!!marching_cubes_mesh,
-    "greedy_projection_mesh": greedy_projection_mesh,
-    "power_crust_mesh": power_crust_mesh,
-    "cocone_mesh": cocone_mesh,
-    "scale_dependent_mesh": scale_dependent_mesh
-}
-
-ply_files = {}
-for name, mesh in meshes.items():
-    file_path = f"{directory_path}{name}.ply"
-    mesh.export(file_path)
-    ply_files[name] = file_path
-
-ply_files
-
-# @title
-# Add a small amount of random noise to the point cloud data to avoid collinearity
-np.random.seed(0)  # For reproducibility
-noise = np.random.normal(0, 1e-6, points.shape)
-points_with_noise = points + noise
-
-# Perform Delaunay triangulation on the perturbed points
-tri_with_noise = Delaunay(points_with_noise)
-
-# Extract the simplices (triangles) from the triangulation
-mesh_with_noise = points_with_noise[tri_with_noise.simplices]
-
-import open3d as o3d
-o3d.io.write_point_cloud("mesh_data.ply",mesh_with_noise)
-
-
-
-import plotly.graph_objs as go
-import pandas as pd
-
-# Load your point cloud data into a variable named `points`
-# points = ...
-
-# Create a mesh3d plot
-fig = go.Figure(data=[go.Mesh3d(x=points[:, 0], y=points[:, 1], z=points[:, 2],
-                                color='cyan', opacity=0.9, alphahull=1)])
-
-# Set plot title
-fig.update_layout(title_text="Interactive 3D Mesh from LiDAR Point Cloud", width=800, height=800)
-
-# Show the interactive plot
-fig.show()
-
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
-
-# Create a new figure for the 3D plot
-fig = plt.figure(figsize=(10, 8))
-ax = fig.add_subplot(111, projection='3d')
-
-# Plot the mesh
-mesh_plot = Poly3DCollection(mesh_with_noise, alpha=0.5, facecolors='cyan', edgecolors='r')
-ax.add_collection3d(mesh_plot)
-
-# Set labels
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
-ax.set_zlabel('Z')
-ax.set_title('3D Mesh from LiDAR Point Cloud')
-
-# Display the plot
-plt.show()
-
-# Save the mesh data to a PLY file
-vertex_data = np.array([tuple(row) for row in points_with_noise],
-                        dtype=[('x', 'f4'), ('y', 'f4'), ('z', 'f4')])
-face_data = np.array([tuple(row) for row in tri_with_noise.simplices],
-                     dtype=[('vertex_indices', 'i4', (3,))])
-
-vertex_element = PlyElement.describe(vertex_data, 'vertex')
-face_element = PlyElement.describe(face_data, 'face')
-
-ply_data = PlyData([vertex_element, face_element])
-ply_file_path = 'mesh_data.ply'
-ply_data.write(ply_file_path)
-
-print(f"Mesh saved as {ply_file_path}")
-
-# Create a mesh3d plot
-fig = go.Figure(data=[go.Mesh3d(x=points[:, 0], y=points[:, 1], z=points[:, 2],
-                                color='cyan', opacity=0.5, alphahull=5)])
-
-# Set plot title
-fig.update_layout(title_text="Interactive 3D Mesh from LiDAR Point Cloud", width=800, height=800)
-
-# Show the interactive plot
-fig.show()
-
-
-
-import open3d as o3d
-from scipy.spatial import Delaunay, ConvexHull
-from sklearn.neighbors import NearestNeighbors
-
-
-
-# Define a function to save a mesh as a PLY file
-def save_mesh_as_ply(mesh, filename):
-    o3d.io.write_triangle_mesh(filename, mesh)
-
-# Define a function to create a mesh using Delaunay triangulation
-def create_delaunay_mesh(points):
-    delaunay = Delaunay(points)
-    mesh = o3d.geometry.TriangleMesh()
-    mesh.vertices = o3d.utility.Vector3dVector(points)
-    #mesh.triangles = o3d.utility.Vector3iVector(delaunay.simplices)
-    return mesh
-
-# Define a function to create a mesh using Convex Hull
-def create_convex_hull_mesh(points):
-    hull = ConvexHull(points)
-    mesh = o3d.geometry.TriangleMesh()
-    mesh.vertices = o3d.utility.Vector3dVector(points)
-    mesh.triangles = o3d.utility.Vector3iVector(hull.simplices)
-    return mesh
-
-# Define a function to create a mesh using Alpha Shapes
-def create_alpha_shape_mesh(points, alpha=0.1):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(pcd, alpha)
-    return mesh
-
-# Define a function to create a mesh using Ball Pivoting
-def create_ball_pivot_mesh(points, radii=o3d.utility.DoubleVector([0.005, 0.01])):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    distances = pcd.compute_nearest_neighbor_distance()
-    avg_dist = np.mean(distances)
-    radius = 1.5 * avg_dist
-    mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(
-        pcd, o3d.utility.DoubleVector([radius, radius * 2]))
-    return mesh
-
-# Define a function to create a mesh using Poisson Surface Reconstruction
-def create_poisson_mesh(points, depth=8):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(points)
-    mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd, depth=depth)
-    return mesh
-
-# Create meshes using different methods
-meshes = {
-    "delaunay": create_delaunay_mesh(points),
-    "convex_hull": create_convex_hull_mesh(points),
-    "alpha_shape": create_alpha_shape_mesh(points),
-    "ball_pivot": create_ball_pivot_mesh(points),
-    "poisson": create_poisson_mesh(points),
-}
-
-# Save each mesh as a PLY file
-for name, mesh in meshes.items():
-    save_mesh_as_ply(mesh, f"{name}_mesh.ply")
-
-# Display one of the meshes interactively
-o3d.visualization.draw_geometries([meshes['delaunay']], window_name='Delaunay Mesh')
+# import plotly.express as px
+# file_path = f'{directory_path}Corner_small_cut.txt'#lidar.csv'#crystal_4000.xyz' sep='\s+,'
+#
+# data = pd.read_csv(file_path, header=None, names=['x', 'y', 'z'])
+#
+# # Create a 3D scatter plot using Plotly
+# fig = px.scatter_3d(data, x='x', y='y', z='z',title='3D Point Cloud Visualization')
+#
+# # Update layout for better visualization
+# fig.update_layout(scene=dict(xaxis_title='X', yaxis_title='Y', zaxis_title='Z'))
+# fig.update_traces(marker=dict(size=1))
+# # Show the plot
+# fig.show()
+#
+# """----- processing files"""
+#
+# # @title
+# 111
+# import numpy as np
+# import pandas as pd
+# import plotly.graph_objs as go
+# from scipy.spatial import Delaunay
+# from sklearn.preprocessing import MinMaxScaler
+# from plyfile import PlyData, PlyElement
+# import matplotlib.pyplot as plt
+# from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+#
+#
+#
+# # Load the LiDAR point cloud data
+# # Replace 'your_file.csv' with the path to{{ your point cloud data file
+# file_path = f'{directory_path}Corner_small_cut.txt'#lidar.csv'#crystal_4000.xyz' sep='\s+,'
+# point_cloud_df = pd.read_csv(file_path,  header=None, engine='python', skiprows=5)
+# print(point_cloud_df.head)
+# # Extract the point cloud data as a numpy array
+# points = point_cloud_df.values
+#
+# # @title
+# # Create a new figure for the 3D plot
+# fig = plt.figure(figsize=(10, 8))
+# ax = fig.add_subplot(111, projection='3d')
+#
+# # Plot the point cloud
+# ax.scatter(points[:, 0], points[:, 1], points[:, 2], c='b', marker='o')
+#
+# # Set labels
+# ax.set_xlabel('X')
+# ax.set_ylabel('Y')
+# ax.set_zlabel('Z')
+# ax.set_title('3D Point Cloud')
+#
+# # Display the plot
+# plt.show()
+#
+# # @title
+# !pip install trimesh
+# from scipy.spatial import Delaunay, ConvexHull
+# from skimage.measure import marching_cubes
+# import trimesh
+#
+# # Method 1: Delaunay Triangulation
+# delaunay = Delaunay(points)
+# delaunay_mesh = trimesh.Trimesh(vertices=points, faces=delaunay.convex_hull)
+#
+# # Method 2: Convex Hull
+# hull = ConvexHull(points)
+# hull_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 3: Alpha Shapes (Custom implementation)
+# # For simplicity, we'll use a fixed alpha value
+# alpha = 0.1
+# alpha_shape_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)  # Simplified
+#
+# # Method 4: Ball Pivoting (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# ball_pivoting_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 5: Poisson Surface Reconstruction (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# poisson_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 6: Marching Cubes
+# # Correct the normalization and scaling of points for the volume grid
+# volume_shape = (50, 50, 50)
+# volume = np.zeros(volume_shape)
+#
+# # Normalize points to fit within the volume grid
+# min_coords = points.min(axis=0)
+# max_coords = points.max(axis=0)
+# normalized_points = (points - min_coords) / (max_coords - min_coords) * (np.array(volume_shape) - 1)
+# normalized_points = np.round(normalized_points).astype(int)
+#
+# # Ensure points are within the bounds of the volume grid
+# valid_indices = np.all((normalized_points >= 0) & (normalized_points < np.array(volume_shape)), axis=1)
+# normalized_points = normalized_points[valid_indices]
+#
+# # Set the volume grid
+# volume[normalized_points[:, 0], normalized_points[:, 1], normalized_points[:, 2]] = 1
+#
+# # Use marching cubes to extract isosurface
+# verts, faces, _, _ = marching_cubes(volume, level=0.5)
+# marching_cubes_mesh = trimesh.Trimesh(vertices=verts, faces=faces)
+#
+# # Method 7: Greedy Projection Triangulation (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# greedy_projection_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 8: Power Crust (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# power_crust_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 9: Cocone Algorithm (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# cocone_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Method 10: Scale-Dependent Surface Reconstruction (Custom implementation)
+# # Simplified version using convex hull as a placeholder
+# scale_dependent_mesh = trimesh.Trimesh(vertices=points, faces=hull.simplices)
+#
+# # Save the meshes as PLY files
+# meshes = {
+#     "delaunay_mesh": delaunay_mesh,
+#     "hull_mesh": hull_mesh,
+#     "alpha_shape_mesh": alpha_shape_mesh,
+#     "ball_pivoting_mesh": ball_pivoting_mesh,
+#     "poisson_mesh": poisson_mesh,
+#     #!!!!!
+#     "marching_cubes_mesh": poisson_mesh,#!!!marching_cubes_mesh,
+#     "greedy_projection_mesh": greedy_projection_mesh,
+#     "power_crust_mesh": power_crust_mesh,
+#     "cocone_mesh": cocone_mesh,
+#     "scale_dependent_mesh": scale_dependent_mesh
+# }
+#
+# ply_files = {}
+# for name, mesh in meshes.items():
+#     file_path = f"{directory_path}{name}.ply"
+#     mesh.export(file_path)
+#     ply_files[name] = file_path
+#
+# ply_files
+#
+# # @title
+# # Add a small amount of random noise to the point cloud data to avoid collinearity
+# np.random.seed(0)  # For reproducibility
+# noise = np.random.normal(0, 1e-6, points.shape)
+# points_with_noise = points + noise
+#
+# # Perform Delaunay triangulation on the perturbed points
+# tri_with_noise = Delaunay(points_with_noise)
+#
+# # Extract the simplices (triangles) from the triangulation
+# mesh_with_noise = points_with_noise[tri_with_noise.simplices]
+#
+# import open3d as o3d
+# o3d.io.write_point_cloud("mesh_data.ply",mesh_with_noise)
+#
+#
+#
+# import plotly.graph_objs as go
+# import pandas as pd
+#
+# # Load your point cloud data into a variable named `points`
+# # points = ...
+#
+# # Create a mesh3d plot
+# fig = go.Figure(data=[go.Mesh3d(x=points[:, 0], y=points[:, 1], z=points[:, 2],
+#                                 color='cyan', opacity=0.9, alphahull=1)])
+#
+# # Set plot title
+# fig.update_layout(title_text="Interactive 3D Mesh from LiDAR Point Cloud", width=800, height=800)
+#
+# # Show the interactive plot
+# fig.show()
+#
+# import matplotlib.pyplot as plt
+# from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+#
+# # Create a new figure for the 3D plot
+# fig = plt.figure(figsize=(10, 8))
+# ax = fig.add_subplot(111, projection='3d')
+#
+# # Plot the mesh
+# mesh_plot = Poly3DCollection(mesh_with_noise, alpha=0.5, facecolors='cyan', edgecolors='r')
+# ax.add_collection3d(mesh_plot)
+#
+# # Set labels
+# ax.set_xlabel('X')
+# ax.set_ylabel('Y')
+# ax.set_zlabel('Z')
+# ax.set_title('3D Mesh from LiDAR Point Cloud')
+#
+# # Display the plot
+# plt.show()
+#
+# # Save the mesh data to a PLY file
+# vertex_data = np.array([tuple(row) for row in points_with_noise],
+#                         dtype=[('x', 'f4'), ('y', 'f4'), ('z', 'f4')])
+# face_data = np.array([tuple(row) for row in tri_with_noise.simplices],
+#                      dtype=[('vertex_indices', 'i4', (3,))])
+#
+# vertex_element = PlyElement.describe(vertex_data, 'vertex')
+# face_element = PlyElement.describe(face_data, 'face')
+#
+# ply_data = PlyData([vertex_element, face_element])
+# ply_file_path = 'mesh_data.ply'
+# ply_data.write(ply_file_path)
+#
+# print(f"Mesh saved as {ply_file_path}")
+#
+# # Create a mesh3d plot
+# fig = go.Figure(data=[go.Mesh3d(x=points[:, 0], y=points[:, 1], z=points[:, 2],
+#                                 color='cyan', opacity=0.5, alphahull=5)])
+#
+# # Set plot title
+# fig.update_layout(title_text="Interactive 3D Mesh from LiDAR Point Cloud", width=800, height=800)
+#
+# # Show the interactive plot
+# fig.show()
+#
+#
+#
+# import open3d as o3d
+# from scipy.spatial import Delaunay, ConvexHull
+# from sklearn.neighbors import NearestNeighbors
+#
+#
+#
+# # Define a function to save a mesh as a PLY file
+# def save_mesh_as_ply(mesh, filename):
+#     o3d.io.write_triangle_mesh(filename, mesh)
+#
+# # Define a function to create a mesh using Delaunay triangulation
+# def create_delaunay_mesh(points):
+#     delaunay = Delaunay(points)
+#     mesh = o3d.geometry.TriangleMesh()
+#     mesh.vertices = o3d.utility.Vector3dVector(points)
+#     #mesh.triangles = o3d.utility.Vector3iVector(delaunay.simplices)
+#     return mesh
+#
+# # Define a function to create a mesh using Convex Hull
+# def create_convex_hull_mesh(points):
+#     hull = ConvexHull(points)
+#     mesh = o3d.geometry.TriangleMesh()
+#     mesh.vertices = o3d.utility.Vector3dVector(points)
+#     mesh.triangles = o3d.utility.Vector3iVector(hull.simplices)
+#     return mesh
+#
+# # Define a function to create a mesh using Alpha Shapes
+# def create_alpha_shape_mesh(points, alpha=0.1):
+#     pcd = o3d.geometry.PointCloud()
+#     pcd.points = o3d.utility.Vector3dVector(points)
+#     mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_alpha_shape(pcd, alpha)
+#     return mesh
+#
+# # Define a function to create a mesh using Ball Pivoting
+# def create_ball_pivot_mesh(points, radii=o3d.utility.DoubleVector([0.005, 0.01])):
+#     pcd = o3d.geometry.PointCloud()
+#     pcd.points = o3d.utility.Vector3dVector(points)
+#     distances = pcd.compute_nearest_neighbor_distance()
+#     avg_dist = np.mean(distances)
+#     radius = 1.5 * avg_dist
+#     mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(
+#         pcd, o3d.utility.DoubleVector([radius, radius * 2]))
+#     return mesh
+#
+# # Define a function to create a mesh using Poisson Surface Reconstruction
+# def create_poisson_mesh(points, depth=8):
+#     pcd = o3d.geometry.PointCloud()
+#     pcd.points = o3d.utility.Vector3dVector(points)
+#     mesh, _ = o3d.geometry.TriangleMesh.create_from_point_cloud_poisson(pcd, depth=depth)
+#     return mesh
+#
+# # Create meshes using different methods
+# meshes = {
+#     "delaunay": create_delaunay_mesh(points),
+#     "convex_hull": create_convex_hull_mesh(points),
+#     "alpha_shape": create_alpha_shape_mesh(points),
+#     "ball_pivot": create_ball_pivot_mesh(points),
+#     "poisson": create_poisson_mesh(points),
+# }
+#
+# # Save each mesh as a PLY file
+# for name, mesh in meshes.items():
+#     save_mesh_as_ply(mesh, f"{name}_mesh.ply")
+#
+# # Display one of the meshes interactively
+# o3d.visualization.draw_geometries([meshes['delaunay']], window_name='Delaunay Mesh')

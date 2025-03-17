@@ -27,8 +27,8 @@ Original file is located at
 # !pip install open3d
 #ply_file=r'C:\Users\1\PycharmProjects\LIFT\Corner_400mesh222.ply'
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+#import matplotlib.pyplot as plt
+#from mpl_toolkits.mplot3d import Axes3D
 def load_point_cloud(file_path):
   with open(file_path, 'r') as file:
     lines = file.readlines()
@@ -204,7 +204,7 @@ def visualize_with_plotly(file_path):
             ))
 
     layout = go.Layout(
-        title=f"Visualizing {file_path} with Plotly",
+       # title=f"Visualizing {file_path} with Plotly",
         scene=dict(
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False, showbackground=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False, showbackground=False),
@@ -216,6 +216,7 @@ def visualize_with_plotly(file_path):
     )
 
     fig = go.Figure(data=lines, layout=layout)
+    fig.write_html("pl.html")
     fig.show()
 
 def visualize_all_ply_files(directory_path,start_index,num_files):
@@ -233,7 +234,7 @@ def visualize_all_ply_files(directory_path,start_index,num_files):
 
 
 
-directory_path=r'C:\Users\1\PycharmProjects\LIFT'
+directory_path=r'S:\Users\LRS\PycharmProjects\LIFT'
 print_all_ply_files(directory_path)
 visualize_all_ply_files(directory_path,0,1)
 #from google.colab import runtime
